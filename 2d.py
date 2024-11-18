@@ -24,11 +24,8 @@ with open('measurements2.csv', 'w', newline='') as csvfile:
         amplitude_float.append(float(a))
 
 
-print(amplitude_float)
-
 amplitude_around0 = []
 meanrawamplitude = sum(amplitude_float)/ len(amplitude_float)
-print(meanrawamplitude)
 for i in amplitude_float:
     amplitude_around0.append(i - meanrawamplitude )
 
@@ -36,10 +33,10 @@ for i in amplitude_float:
 # hilbert transformation of amplitude_raw
 hilbert_amplitude = hilbert(amplitude_around0)
 amplitude_envelope = np.abs(hilbert_amplitude)
-print(amplitude_envelope[50:200])
 
-plt.plot(time, amplitude_around0)
-plt.plot(time, amplitude_envelope)
-# plt.plot(time, amplitude_envelope.real)
-# plt.plot(time, amplitude_envelope.imag)
+plt.plot(time, amplitude_around0, label = 'signaal')
+plt.plot(time, amplitude_envelope, label = 'envelope')
+plt.xlabel('time(ms)')
+plt.ylabel('amplitude(mV)')
+plt.legend()
 plt.show()
