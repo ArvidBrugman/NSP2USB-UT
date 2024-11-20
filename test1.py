@@ -5,6 +5,15 @@ from scipy.signal import hilbert
 import numpy as np
 from scipy.interpolate import griddata
 
+import os
+import glob
+
+
+# folder_path = '\Users\study\Documents\GitHub\NSP2USB-UT\measurements1'
+# for filename in glob.glob(os.path.join(folder_path, '*.txt')):
+#     with open (filename, 'r') as file:
+#         print(file.read())
+
 # Empty lists
 distance = []
 time = []
