@@ -8,12 +8,6 @@ from scipy.interpolate import griddata
 import os
 import glob
 
-
-# folder_path = '\Users\study\Documents\GitHub\NSP2USB-UT\measurements1'
-# for filename in glob.glob(os.path.join(folder_path, '*.txt')):
-#     with open (filename, 'r') as file:
-#         print(file.read())
-
 # Empty lists
 distance = []
 time = []
@@ -44,8 +38,8 @@ time = np.array(time)
 amplitude_envelope = np.array(amplitude_envelope)
 
 # Create grid for interpolation
-xi = np.linspace(min(time), max(time), 500)  # High resolution for smoothness
-yi = np.linspace(min(distance), max(distance), 100)
+xi = np.linspace(min(time), max(time), 1000)  # High resolution for smoothness
+yi = np.linspace(min(distance), max(distance), 1000)
 xi, yi = np.meshgrid(xi, yi)
 
 # Interpolate data
