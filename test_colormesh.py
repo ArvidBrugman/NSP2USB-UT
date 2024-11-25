@@ -1,3 +1,8 @@
+import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib.colors import BoundaryNorm
+from matplotlib.ticker import MaxNLocator
+
 import csv
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -33,12 +38,5 @@ for d in range(0, 215, 5):
 hilbert_amplitude = hilbert(amplitude_raw)
 amplitude_envelope = np.abs(hilbert_amplitude)
 
-df = pd.DataFrame({'distance': distance, 'time':time, "amplitude_envelope": amplitude_envelope})
-print(df)
-
-piv = pd.pivot_table(df, values="amplitude_envelope",index=["distance"], columns=["time"], fill_value=0)
-ax = sns.heatmap(piv, square =True)
-plt.setp(ax.xaxis.get_majorticklabels(), rotation=90)
-plt.tight_layout()
-plt.show()
-
+fig, ax = plt.subplots()
+ax.pcolormesh(time,distance,amplitude_envelope)
