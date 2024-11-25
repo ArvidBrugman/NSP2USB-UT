@@ -36,8 +36,8 @@ amplitude_values = pivot_table.values  # Z-axis
 # Plot with pcolormesh
 fig, ax = plt.subplots(figsize=(10, 6))
 mesh = ax.pcolormesh(time_values, distance_values, amplitude_values.T, shading='auto', cmap='viridis')
-fig.colorbar(mesh, ax=ax, label='Amplitude Envelope')
-ax.set_xlabel('Time')
-ax.set_ylabel('Distance')
+fig.colorbar(mesh, ax=ax, label='Amplitude Envelope (in mV)')
+ax.set_xlabel('Time (in ms)')
+ax.set_ylabel('Distance (in mm)')
 ax.set_title('Amplitude Envelope over Distance and Time')
 plt.show()
