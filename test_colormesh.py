@@ -8,15 +8,18 @@ distance = []
 time = []
 amplitude_raw = []
 
+
 # Load data from files
 for d in range(0, 215, 5):
-    for _ in range(800):  # Repeat distances = 800
+    for _ in range(2000):  # Repeat distances = 800
         distance.append(d)
     with open(f'{d}.000000.txt') as file:
         for line in file:
             column = line.split()
             time.append(float(column[0]))  # Convert to float
             amplitude_raw.append(float(column[1]))  # Convert to float
+
+print(len(time))
 
 # Hilbert transform for amplitude envelope
 hilbert_amplitude = hilbert(amplitude_raw)
