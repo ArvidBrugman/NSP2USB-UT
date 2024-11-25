@@ -1,32 +1,16 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from matplotlib.colors import BoundaryNorm
-from matplotlib.ticker import MaxNLocator
-
-import csv
-import matplotlib.pyplot as plt
-import seaborn as sns
 from scipy.signal import hilbert
-import numpy as np
-from scipy.interpolate import griddata
 import pandas as pd
-import seaborn as sns
-import os
-import glob
 
 # Empty lists
 distance = []
 time = []
 amplitude_raw = []
 
-
-#arg = int(input("arg(34400)="))
-#number = int(arg / 43)
-
-
 # Load data from files
 for d in range(0, 215, 5):
-    for _ in range(800):  # NUMBER Repeat distances = 800
+    for _ in range(800):  # Repeat distances = 800
         distance.append(d)
     with open(f'{d}.000000.txt') as file:
         for line in file:
@@ -38,5 +22,22 @@ for d in range(0, 215, 5):
 hilbert_amplitude = hilbert(amplitude_raw)
 amplitude_envelope = np.abs(hilbert_amplitude)
 
-fig, ax = plt.subplots()
-ax.pcolormesh(time,distance,amplitude_envelope)
+# Create DataFrame
+df = pd.DataFrame({'distance': distance, 'time': time, 'amplitude_envelope': amplitude_envelope})
+
+# Pivot data for 2D grid
+pivot_table = df.pivot_table(values='amplitude_envelope', index='time', columns='distance')
+
+# Extract 2D arrays
+distance_values = pivot_table.columns.values  # X-axis
+time_values = pivot_table.index.values  # Y-axis
+amplitude_values = pivot_table.values  # Z-axis
+
+# Plot with pcolormesh
+fig, ax = plt.subplots(figsize=(10, 6))
+mesh = ax.pcolormesh(time_values, distance_values, amplitude_values.T, shading='auto', cmap='viridis')
+fig.colorbar(mesh, ax=ax, label='Amplitude Envelope')
+ax.set_xlabel('Time')
+ax.set_ylabel('Distance')
+ax.set_title('Amplitude Envelope over Distance and Time')
+plt.show()
