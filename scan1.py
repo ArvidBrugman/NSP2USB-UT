@@ -4,7 +4,6 @@ from scipy.fftpack import *
 from scipy.signal import hilbert
 import numpy as np
 from scipy.interpolate import griddata
-import os
 #empty lists
 distance = []
 time = []
