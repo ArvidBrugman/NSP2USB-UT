@@ -11,7 +11,7 @@ amplitude_raw = []
 
 # Load data from files
 for d in range(25, 215, 5):
-    for _ in range(501):  # Repeat distances = 800
+    for _ in range(2000):  # Repeat distances = 800
         distance.append(d)
     with open(f'{d}.000000.txt') as file:
         for line in file:
@@ -21,7 +21,7 @@ for d in range(25, 215, 5):
             if column[0] > "0.4.3000":
                 break
                 
-print(len(np.arange(25, 215, 5)))
+#print(len(np.arange(25, 215, 5)))
 print(len(time))
 
 # # Hilbert transform for amplitude envelope
