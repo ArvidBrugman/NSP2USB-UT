@@ -10,7 +10,7 @@ amplitude_raw = []
 
 
 # Load data from files
-for d in range(0, 213, 3):
+for d in range(0, 215, 5):
     for _ in range(2000):  # Repeat distances = 800
         distance.append(d)
     with open(f'{d}.000000.txt') as file:
