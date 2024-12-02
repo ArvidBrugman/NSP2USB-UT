@@ -32,8 +32,7 @@ class heatmap_scan:
                     column = line.split()
                     self.scanlength.append(float(column[0]) * 1500)  # Convert to float
                     self.amplitude_raw.append(float(column[1]))  # Convert to float
-            for _ in range(len(self.scanlength)):  # Repeat distances
-                self.distance_motor.append(d)
+                    self.distance_motor.append(d)
 
         mean_amplitude_raw = np.mean(self.amplitude_raw)
 
@@ -45,6 +44,7 @@ class heatmap_scan:
         self.amplitude_envelope = np.abs(hilbert_amplitude)
 
     def heatmap(self):
+        """Plot the heatmap using pcolormesh"""
         # Create DataFrame
         df = pd.DataFrame(
             {
@@ -82,6 +82,7 @@ class heatmap_scan:
         plt.show()
 
     def csv_creator(self):
+        """Create CSV file of all data"""
         with open("raw_values.csv", "w", newline="") as csvfile:
             writer = csv.writer(csvfile)
             writer.writerow(["Distance(mm)", "Time(ms)", "Amptitude(mV)"])
