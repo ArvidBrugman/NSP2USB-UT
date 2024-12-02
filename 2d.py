@@ -8,7 +8,7 @@ distance = []
 time = []
 amplitude_raw = []
 
-with open(f'{150}.000000.txt') as file:
+with open(f'{72}.000000.txt') as file:
     for line in file:
         column = line.split()
         time.append(column[0])
