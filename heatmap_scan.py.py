@@ -73,7 +73,7 @@ class heatmap_scan:
             distance_motor_values,
             amplitude_values.T,
             shading="gouraud",
-            cmap="viridis",
+            cmap="seismic",
         )
         fig.colorbar(mesh, ax=ax, label="Amplitude Envelope (in mV)")
         ax.set_xlabel("Scanlength  (in mm)")
