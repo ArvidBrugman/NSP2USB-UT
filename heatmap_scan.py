@@ -15,12 +15,11 @@ class heatmap_scan:
         self.scanlength = []
         self.amplitude_around0 = []
 
-    def lists(self, stepsize, folder="meas1"):
+    def lists(self, stepsize):
         """Create lists of the data gotten from the scan in txt files
 
         Args:
             STEPSIZE(int): The stepsize in mm that is used for the data.
-            FOLDER (str): The folder containing the txt files.
 
         Returns:
             list: Distance that the motor has covered
