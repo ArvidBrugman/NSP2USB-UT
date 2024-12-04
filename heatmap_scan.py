@@ -27,6 +27,16 @@ class heatmap_scan:
             list: Distance that the scan has covered
             list: Amplitude of signal with Hilbert transformation
         """
+        all_ampl = []
+        for a in range(0, 210 + stepsize, stepsize):
+            for meas in range(1, 6):
+                with open(f"{a}.00000{meas}.txt") as file:
+                    for line in file:
+                        column = line.split()
+                        all_ampl.append(float(column[1]))
+
+        mean_ampl = np.mean(all_ampl)
+        print(mean_ampl)
 
         for d in range(0, 210 + stepsize, stepsize):
             for meas in range(1, 6):
@@ -40,7 +50,7 @@ class heatmap_scan:
                         self.scanlength.append(
                             float(column[0]) * 1500
                         )  # Convert to float
-                        self.amplitude_raw.append(float(column[1]))
+                        self.amplitude_raw.append(float(column[1]) - mean_ampl)
                         # hilbert transformation of self.amplitude_raw
                         hilbert_amplitude = hilbert(self.amplitude_raw)
                         self.amplitude_envelope = np.abs(
@@ -48,19 +58,15 @@ class heatmap_scan:
                         )  # Convert to float
                         self.distance_motor.append(d)
                         self.avg_scanlength.append(np.mean(self.scanlength))
-                        self.avg_amplitude_envelope.append(
-                            np.mean(self.amplitude_envelope)
-                        )
+                        self.amplitude.append(np.mean(self.amplitude_envelope))
                         self.avg_distance_motor.append(np.mean(self.distance_motor))
 
-        # mean_amplitude_raw = np.mean(self.amplitude_raw)
+        # mean_ampl = np.mean(self.avg_amplitude_envelope)
+        # for i in self.avg_amplitude_envelope:
+        #     self.amplitude.append(i - mean_ampl)
 
-        # for i in self.amplitude_raw:
-        #     self.amplitude_around0.append(i - mean_amplitude_raw)
-
-        mean_ampl = np.mean(self.avg_amplitude_envelope)
-        for i in self.avg_amplitude_envelope:
-            self.amplitude.append(i - mean_ampl)
+        error_amplitudie = np.std(self.amplitude) / np.sqrt(5)
+        print(error_amplitudie)
 
     def heatmap(self):
         """Plot the heatmap using pcolormesh"""
@@ -72,7 +78,6 @@ class heatmap_scan:
                 "amplitude": self.amplitude,
             }
         )
-        print(df)
         # Pivot data for 2D grid
         pivot_table = df.pivot_table(
             values="amplitude",
@@ -92,7 +97,7 @@ class heatmap_scan:
             distance_motor_values,
             amplitude_values.T,
             shading="gouraud",
-            cmap="seismic",
+            cmap="plasma",
         )
         fig.colorbar(mesh, ax=ax, label="Amplitude (in mV)")
         ax.set_xlabel("Scanlength  (in mm)")
