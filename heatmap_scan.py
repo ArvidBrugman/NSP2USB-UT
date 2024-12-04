@@ -1,4 +1,5 @@
 import csv
+import os
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -18,14 +19,14 @@ class heatmap_scan:
         """Create lists of the data gotten from the scan in txt files
 
         Args:
-            stepsize (int): The stepsize in mm that is used for the data
+            STEPSIZE(int): The stepsize in mm that is used for the data.
 
         Returns:
             list: Distance that the motor has covered
             list: Distance that the scan has covered
             list: Amplitude of signal with Hilbert transformation
         """
-        # Load data from files
+
         for d in range(0, 210 + stepsize, stepsize):
             with open(f"{d}.000000.txt") as file:
                 for line in file:
@@ -93,6 +94,6 @@ class heatmap_scan:
 
 
 plot = heatmap_scan()
-plot.lists(3)
+plot.lists(3, folder="meas1")
 plot.heatmap()
 plot.csv_creator()
