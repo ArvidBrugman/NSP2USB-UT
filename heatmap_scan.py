@@ -42,7 +42,7 @@ class heatmap_scan:
                         )  # Convert to float
                         self.amplitude_raw.append(float(column[1]))
                         # hilbert transformation of self.amplitude_raw
-                        hilbert_amplitude = hilbert(self.amplitude_around0)
+                        hilbert_amplitude = hilbert(self.amplitude_raw)
                         self.amplitude_envelope = np.abs(
                             hilbert_amplitude
                         )  # Convert to float
