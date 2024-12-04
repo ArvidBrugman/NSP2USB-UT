@@ -36,7 +36,6 @@ class heatmap_scan:
                         all_ampl.append(float(column[1]))
 
         mean_ampl = np.mean(all_ampl)
-        print(mean_ampl)
 
         for d in range(0, 210 + stepsize, stepsize):
             for meas in range(1, 6):
