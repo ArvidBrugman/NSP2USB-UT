@@ -94,6 +94,6 @@ class heatmap_scan:
 
 
 plot = heatmap_scan()
-plot.lists(3, folder="meas1")
+plot.lists(3)
 plot.heatmap()
 plot.csv_creator()
