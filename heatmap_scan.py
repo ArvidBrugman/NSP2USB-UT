@@ -99,9 +99,9 @@ class heatmap_scan:
             cmap="plasma",
         )
         fig.colorbar(mesh, ax=ax, label="Amplitude (in mV)")
-        ax.set_xlabel("Scanlength  (in mm)")
-        ax.set_ylabel("Distance of motor (in mm)")
-        ax.set_title("Amplitude over Distance and Time")
+        ax.set_xlabel("Afstand afgelegd door het signaal  (in mm)")
+        ax.set_ylabel("Afstand afgelegd door motor (in mm)")
+        ax.set_title("Amplitude van signaal over de afstand van de motor en de afstand afgelegd door het signaal")
         plt.show()
 
     def csv_creator(self):
