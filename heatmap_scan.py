@@ -13,7 +13,6 @@ class heatmap_scan:
 
         self.amplitude = []
         self.avg_scanlength = []
-        self.avg_amplitude_envelope = []
         self.avg_distance_motor = []
 
     def lists(self, stepsize):
@@ -60,10 +59,6 @@ class heatmap_scan:
                         self.amplitude.append(np.mean(self.amplitude_envelope))
                         self.avg_distance_motor.append(np.mean(self.distance_motor))
 
-        # mean_ampl = np.mean(self.avg_amplitude_envelope)
-        # for i in self.avg_amplitude_envelope:
-        #     self.amplitude.append(i - mean_ampl)
-
         error_amplitudie = np.std(self.amplitude) / np.sqrt(5)
         print(error_amplitudie)
 
@@ -109,7 +104,7 @@ class heatmap_scan:
         with open("raw_values.csv", "w", newline="") as csvfile:
             writer = csv.writer(csvfile)
             writer.writerow(["Distance(mm)", "Time(ms)", "Amptitude(mV)"])
-            for d, t, a in zip(self.distance_motor, self.scanlength, self.amplitude):
+            for d, t, a in zip(self.avg_distance_motor, self.avg_scanlength, self.amplitude):
                 writer.writerow([d, t, a])
 
 

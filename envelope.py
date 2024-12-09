@@ -34,9 +34,14 @@ for i in amplitude_float:
 # hilbert transformation of amplitude_raw
 hilbert_amplitude = hilbert(amplitude_around0)
 amplitude_envelope = np.abs(hilbert_amplitude)
-plt.plot(time, amplitude_around0, color='orange', label='Origineel Signaal')
-plt.plot(time, amplitude_envelope, color='purple', label='Envelop')
+fig,ax = plt.subplots(1)
+
+plt.plot(time, amplitude_around0, color='blue', label='Origineel Signaal')
+plt.plot(time, amplitude_envelope, color='orange', label='Envelop')
+ax.set_xticklabels([])
+ax.set_xticks([])
+ax.set_title("Hilbert transformatie van amplitude-meetresultaten")
 plt.xlabel('Tijd (ms)')
-plt.ylabel('Amplitude (mv)')
+plt.ylabel('Amplitude (mV)')
 plt.legend()
 plt.show()
